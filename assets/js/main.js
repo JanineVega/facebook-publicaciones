@@ -1,26 +1,45 @@
-
-
-function alerta (){
-  alert ("prueba de que si jala el js");
-}
-alerta();
-
 function validateForm(){
+// ----------------Validando ------------------------------------------------
 
-  alert("ai salles");
-  var correo          = document.getElementById("inputEmail").value;
-  var emailError      = document.getElementById("email-error");
-  var contraseña      = document.getElementById("inputPassword").value;
-  var contraseñaError = document.getElementById("password-error");
+    var correo        =   document.getElementById("input-email").value;
+    var emailError    =   document.getElementById("email-error");
+    var contrasena      = document.getElementById("input-password").value;
+    var contrasenaError = document.getElementById("password-error");
+    var usuarios=[{emailok:"janine@laboratoria.com", contrasenaok:"123456"},
+                  {emailok:"janetth@laboratoria.com", contrasenaok:"1111111"},
+                  ];
 
-  if (!(/^[\w]+@{1}[\w]+\.+[a-z]{3}$/.test(correo))){
-      alert("La dirección de email " + correo + " no es correcta.");
-      return false;
+    var boton         =   document.getElementById("validar");
 
-    } else if (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,15}/.test(contraseña))|| contraseña=="password" || contraseña=="123456" || contraseña == "098754"){
-      alert("La contraseña es invalida! ");
-      contraseñaError.innerHTML = "Debe ser mayor o igual a 6 digitos contener letras y números, almenos un carácter y una letra mayúscula.";
-      return false;
-    }
+      if(correo.length==0 || contrasena.length==0){
+        alert("Llene todos los datos");
+        return false;
+      }
+      if ((!(/^[\w]+@{1}[\w]+\.+[a-z]{3}$/.test(correo)))){
 
+        emailError.innerHTML = "Dirección de email es invalida.";
+        return false;
+      } else {
+        emailError.innerHTML="";
+      }
+        var x=0;
+         for ( var prop in usuarios){
+            if(usuarios[prop].emailok==correo){
+                x=1;
+                if(usuarios[prop].contrasenaok==contrasena){
+                  alert("next");
+                  return false;
+                }else{
+                  contrasenaError.innerHTML = "Contraseña es incorrecta";
+                }
+                break;
+
+            }
+         }
+         if(x==0){
+           emailError.innerHTML = "El usuario es invalido.";
+           return false;
+         } else {
+           emailError.innerHTML="";
+         }
 }
